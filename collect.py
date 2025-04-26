@@ -35,7 +35,7 @@ def is_duplicate_state(current_state, last_state):
 
 if __name__ == '__main__':
     seen_trains = {}  # Track which trains we've seen
-    lines = ["A", "B", "G", "J", "N", "L", "1"]
+    lines = ["A", "B", "G", "J", "N", "L", "1", "2", "3"]
     
     # Create data directory if it doesn't exist
     os.makedirs("data", exist_ok=True)
@@ -95,6 +95,7 @@ if __name__ == '__main__':
                             "underway": str(underway),
                             "is_delayed": str(is_delayed),
                             "last_position_update": str(lpu),
+                            "stop_time_updates": str(stop_time_updates),
                             "timestamp": datetime.now().isoformat()
                         }
                         

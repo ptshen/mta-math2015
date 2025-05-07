@@ -174,7 +174,7 @@ def round_to_next_10_min(timestamp_str):
     return rounded.isoformat()
 
 
-count_pops()
+#print(average_trips())
 
 
 

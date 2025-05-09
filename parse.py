@@ -51,7 +51,7 @@ def average_trips():
 
 # returns a list of dictionaries with timestamp as key and number of late vs on time trips as values
 
-def count_pops():
+def count_pops(json_file = 'data/train_data_1_cleaned.json', output_file = 'train_1_pops.json'):
 
 
     with open(json_file, 'r') as f:
@@ -174,22 +174,37 @@ def round_to_next_10_min(timestamp_str):
     return rounded.isoformat()
 
 
-#print(average_trips())
 
 
 
-
-
-
-
-
-
-
-
-
-
+def filter_train_data_by_date_range(start_date_str, end_date_str, output_file):
+ 
+    # Convert input date strings to datetime objects
+    start_date = datetime.strptime(start_date_str, '%m/%d/%Y')
+    end_date = datetime.strptime(end_date_str, '%m/%d/%Y')
     
-
+    # Read the original data
+    with open('train_1_pops.json', 'r') as f:
+        data = json.load(f)
     
+    # Filter data points within the date range
+    filtered_data = []
+    for timestamp_str, value in data:
+        current_date = datetime.fromisoformat(timestamp_str)
+        if start_date <= current_date <= end_date:
+            filtered_data.append([timestamp_str, value])
+    
+    # Save filtered data to JSON file
+    with open(output_file, 'w') as f:
+        json.dump(filtered_data, f, indent=4)
+    
+    return filtered_data
+
+
+#count_pops()
+
+# inclusive on both ends
+filter_train_data_by_date_range('05/05/2025', '05/09/2025', 'test_weekday.json')
+
 
 
